@@ -5,7 +5,7 @@ This project demonstrates how to integrate Ogre3D into a Qt application using a 
 ## Prerequisites
 
 To run this project, you will need to have the following installed:
-
+- Ubuntu 22.04/18.04
 - Qt 5.14.2 or later
 - Ogre3D 1.12.13 or later
 
@@ -14,9 +14,8 @@ To run this project, you will need to have the following installed:
 To install this project, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Open the `QtOgreIntegration.pro` file in Qt Creator.
-3. Build the project.
-4. Run the project.
+2. Build the project.
+3. Run the project.
 
 ## Usage
 
