@@ -43,17 +43,8 @@ QOgre3DWidget::QOgre3DWidget(OgreBites::KApplicationContext* context, QWidget* p
 
     testLoadModel();
 
-    m_timer = new QTimer(this);
-    connect(m_timer, &QTimer::timeout, this, &QOgre3DWidget::render);
-//    m_timer->start(16);
-
     std::thread(&QOgre3DWidget::startRender, this).detach();
 
-}
-
-void QOgre3DWidget::render()
-{
-    m_ogreRoot->renderOneFrame();
 }
 
 void QOgre3DWidget::testLoadModel()
