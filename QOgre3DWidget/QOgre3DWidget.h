@@ -28,7 +28,6 @@ protected:
     Ogre::RenderWindow* m_renderWindow;
     Ogre::SceneManager* m_sceneManager;
     Ogre::Camera* m_camera;
-    QTimer* m_timer;
 
 };
 
