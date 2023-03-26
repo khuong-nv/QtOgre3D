@@ -17,7 +17,6 @@ class QOgre3DWidget : public QWidget
 public:
     QOgre3DWidget(OgreBites::KApplicationContext* context, QWidget* parent = nullptr);
 
-    void render();
     void testLoadModel();
     void startRender();
 protected:
