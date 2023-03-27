@@ -1,8 +1,10 @@
 #include "QOgre3DWidget.h"
+#include <OgreEntity.h>
 #include <QTimer>
 #include <iostream>
 #include <OgreResourceGroupManager.h>
 #include <QWidget>
+#include <OgreMeshManager.h>
 #include "OgreCameraMan.h"
 
 using namespace std;
@@ -41,13 +43,16 @@ QOgre3DWidget::QOgre3DWidget(OgreBites::KApplicationContext* context, QWidget* p
     Ogre::Viewport* viewport = m_renderWindow->addViewport(m_camera);
     viewport->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-    testLoadModel();
+    // Setup tray/overlay
+    setupTrays();
+
+    // test render
+    testRender();
 
     std::thread(&QOgre3DWidget::startRender, this).detach();
-
 }
 
-void QOgre3DWidget::testLoadModel()
+void QOgre3DWidget::testRender()
 {
     // finally something to render
     Ogre::Entity* ent = m_sceneManager->createEntity("ogrehead.mesh");
@@ -66,4 +71,14 @@ void QOgre3DWidget::resizeEvent(QResizeEvent *event)
     m_camera->setAspectRatio(Ogre::Real(width()) / Ogre::Real(height()));
     m_renderWindow->resize(width(), height());
     m_renderWindow->windowMovedOrResized();
+}
+
+void QOgre3DWidget::setupTrays()
+{
+    m_sceneManager->addRenderQueueListener(m_context->getOverlaySystem());
+    m_trayManager = std::make_shared<OgreBites::TrayManager>("InterfaceName", m_renderWindow);
+    m_trayManager->showFrameStats(OgreBites::TrayLocation::TL_BOTTOMLEFT);
+    m_trayManager->showLogo(OgreBites::TrayLocation::TL_BOTTOMRIGHT);
+    m_trayManager->hideCursor();
+    m_context->addInputListener(m_trayManager.get());
 }

@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -std=gnu++11 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -isystem /usr/local/include/OGRE -isystem /usr/local/include/OGRE/Bites -isystem /usr/local/include/OGRE/RTShaderSystem -IQOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -IBUILD -isystem /usr/include/libdrm -IBUILD -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I. -isystem /usr/local/include/OGRE -isystem /usr/local/include/OGRE/Overlay -isystem /usr/local/include/OGRE/Bites -isystem /usr/local/include/OGRE/RTShaderSystem -IQOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -IBUILD -isystem /usr/include/libdrm -IBUILD -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /opt/Qt5.14.2/5.14.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = MyOgre3D1.0.0
-DISTDIR = /home/khuongnv/Downloads/MyOgre3D/BUILD/MyOgre3D1.0.0
+DISTDIR = /media/khuongnv/WS/eclipse-workspace/MyOgre3D/BUILD/MyOgre3D1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/opt/Qt5.14.2/5.14.2/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/usr/local/lib/ -L/usr/local/lib/OGRE -lOgreBites -lOgreMain /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Widgets.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Gui.so /opt/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
@@ -225,6 +225,7 @@ DIST          = /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -422,6 +423,7 @@ Makefile: MyOgre3D.pro /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf 
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -602,6 +604,7 @@ Makefile: MyOgre3D.pro /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf 
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/features/default_pre.prf:
@@ -797,7 +800,7 @@ BUILD/moc_mainwindow.cpp: mainwindow.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qsurfaceformat.h \
 		BUILD/moc_predefs.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/Downloads/MyOgre3D/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/Downloads/MyOgre3D -I/usr/local/include/OGRE -I/usr/local/include/OGRE/Bites -I/usr/local/include/OGRE/RTShaderSystem -I/home/khuongnv/Downloads/MyOgre3D/QOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o BUILD/moc_mainwindow.cpp
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /media/khuongnv/WS/eclipse-workspace/MyOgre3D/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/media/khuongnv/WS/eclipse-workspace/MyOgre3D -I/usr/local/include/OGRE -I/usr/local/include/OGRE/Overlay -I/usr/local/include/OGRE/Bites -I/usr/local/include/OGRE/RTShaderSystem -I/media/khuongnv/WS/eclipse-workspace/MyOgre3D/QOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o BUILD/moc_mainwindow.cpp
 
 BUILD/moc_QOgre3DWidget.cpp: QOgre3DWidget/QOgre3DWidget.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QWidget \
@@ -917,7 +920,7 @@ BUILD/moc_QOgre3DWidget.cpp: QOgre3DWidget/QOgre3DWidget.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qicon.h \
 		BUILD/moc_predefs.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/Downloads/MyOgre3D/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/Downloads/MyOgre3D -I/usr/local/include/OGRE -I/usr/local/include/OGRE/Bites -I/usr/local/include/OGRE/RTShaderSystem -I/home/khuongnv/Downloads/MyOgre3D/QOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include QOgre3DWidget/QOgre3DWidget.h -o BUILD/moc_QOgre3DWidget.cpp
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /media/khuongnv/WS/eclipse-workspace/MyOgre3D/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/media/khuongnv/WS/eclipse-workspace/MyOgre3D -I/usr/local/include/OGRE -I/usr/local/include/OGRE/Overlay -I/usr/local/include/OGRE/Bites -I/usr/local/include/OGRE/RTShaderSystem -I/media/khuongnv/WS/eclipse-workspace/MyOgre3D/QOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include QOgre3DWidget/QOgre3DWidget.h -o BUILD/moc_QOgre3DWidget.cpp
 
 BUILD/moc_KApplicationContext.cpp: QOgre3DWidget/KApplicationContext.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QObject \
@@ -1035,7 +1038,7 @@ BUILD/moc_KApplicationContext.cpp: QOgre3DWidget/KApplicationContext.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qtouchdevice.h \
 		BUILD/moc_predefs.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc
-	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/khuongnv/Downloads/MyOgre3D/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/khuongnv/Downloads/MyOgre3D -I/usr/local/include/OGRE -I/usr/local/include/OGRE/Bites -I/usr/local/include/OGRE/RTShaderSystem -I/home/khuongnv/Downloads/MyOgre3D/QOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include QOgre3DWidget/KApplicationContext.h -o BUILD/moc_KApplicationContext.cpp
+	/opt/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /media/khuongnv/WS/eclipse-workspace/MyOgre3D/BUILD/moc_predefs.h -I/opt/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/media/khuongnv/WS/eclipse-workspace/MyOgre3D -I/usr/local/include/OGRE -I/usr/local/include/OGRE/Overlay -I/usr/local/include/OGRE/Bites -I/usr/local/include/OGRE/RTShaderSystem -I/media/khuongnv/WS/eclipse-workspace/MyOgre3D/QOgre3DWidget -I/opt/Qt5.14.2/5.14.2/gcc_64/include -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include QOgre3DWidget/KApplicationContext.h -o BUILD/moc_KApplicationContext.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1311,11 +1314,27 @@ BUILD/mainwindow.o: mainwindow.cpp mainwindow.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qsurface.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qsurfaceformat.h \
 		BUILD/ui_mainwindow.h \
-		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QHBoxLayout \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/QVariant \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QApplication \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qapplication.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qguiapplication.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtGui/qinputmethod.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QMenuBar \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qmenubar.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qmenu.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qaction.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qactiongroup.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QStatusBar \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QVBoxLayout \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qboxlayout.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlayout.h \
 		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qgridlayout.h
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		/opt/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets/QHBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BUILD/mainwindow.o mainwindow.cpp
 
 BUILD/QOgre3DWidget.o: QOgre3DWidget/QOgre3DWidget.cpp QOgre3DWidget/QOgre3DWidget.h \

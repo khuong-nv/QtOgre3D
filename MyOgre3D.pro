@@ -37,12 +37,9 @@ UI_DIR      = BUILD
 
 
 INCLUDEPATH += /usr/local/include/OGRE/
+INCLUDEPATH += /usr/local/include/OGRE/Overlay
 INCLUDEPATH += /usr/local/include/OGRE/Bites
 INCLUDEPATH += /usr/local/include/OGRE/RTShaderSystem
-
-DEPENDPATH += /usr/local/include/OGRE/
-DEPENDPATH += /usr/local/include/OGRE/Bites
-DEPENDPATH += /usr/local/include/OGRE/RTShaderSystem
 
 include(QOgre3DWidget/QOgre3DWidget.pri)
 
