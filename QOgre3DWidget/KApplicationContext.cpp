@@ -6,6 +6,8 @@
  */
 
 #include "KApplicationContext.h"
+
+#include <OgreConfigFile.h>
 #include "OgreRenderWindow.h"
 #include <OgreStringConverter.h>
 #include <QGuiApplication>
@@ -15,14 +17,18 @@
 #include <iostream>
 
 using namespace std;
-namespace OgreBites
+namespace KEngine
 {
+
+using namespace OgreBites;
 
 KApplicationContext::KApplicationContext(const Ogre::String& appName)
 : ApplicationContextBase(appName)
 , m_qtEventLoop(false)
 , m_parentWidget(nullptr)
 {
+    Ogre::String configDir = Ogre::StringUtil::standardisePath("./resources/default_ogre_config");
+    mFSLayer->setConfigPaths({configDir});
 	this->createRoot();
 	if (!this->oneTimeConfig()) return;
 	mRoot->initialise(false);
@@ -212,7 +218,40 @@ static Event convert(const QEvent* in)
 	return out;
 }
 
+void KApplicationContext::loadNewResources(const Ogre::String &resourcePath)
+{
+	// Load resource paths from config file
+	Ogre::ConfigFile cf;
+	cf.load(resourcePath);
+    Ogre::LogManager::getSingleton().logMessage("Parsing '"+resourcePath+"'");
 
+	// Go through all sections & settings in the file
+	auto seci = cf.getSettingsBySection();
+
+	Ogre::String secName, typeName, archName;
+	for(const auto &settingsPair : seci)
+	{
+		secName = settingsPair.first;
+		if(settingsPair.second.size() == 0) continue;
+
+		if(!Ogre::ResourceGroupManager::getSingleton().resourceGroupExists(secName))
+		{
+			Ogre::ResourceGroupManager::getSingleton().createResourceGroup(secName);
+		}
+		Ogre::ConfigFile::SettingsMultiMap settings = static_cast<Ogre::ConfigFile::SettingsMultiMap>(settingsPair.second);
+		Ogre::ConfigFile::SettingsMultiMap::iterator i;
+		for (i = settings.begin(); i != settings.end(); ++i)
+		{
+			typeName = i->first;
+			archName = i->second;
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
+					archName, typeName, secName, true);
+		}
+		Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup(secName);
+
+	}
+
+}
 
 bool KApplicationContext::eventFilter(QObject *obj, QEvent *event)
 {

@@ -12,10 +12,10 @@
 #include <QWidget>
 #include <OgreRoot.h>
 #include <OGRE/Bites/OgreApplicationContextBase.h>
-namespace OgreBites
+namespace KEngine
 {
 
-class KApplicationContext : public QObject, public ApplicationContextBase
+class KApplicationContext : public QObject, public OgreBites::ApplicationContextBase
 {
 	Q_OBJECT
 public:
@@ -26,9 +26,9 @@ public:
 	explicit KApplicationContext(const Ogre::String& appName = "Ogre3D");
 	virtual ~KApplicationContext();
 
-	void setWindowGrab(NativeWindowType* win, bool grab);
-	void addInputListener(NativeWindowType* win, InputListener* lis) override;
-	void removeInputListener(NativeWindowType* win, InputListener* lis) override;
+	void setWindowGrab(OgreBites::NativeWindowType* win, bool grab);
+	void addInputListener(OgreBites::NativeWindowType* win, OgreBites::InputListener* lis) override;
+	void removeInputListener(OgreBites::NativeWindowType* win, OgreBites::InputListener* lis) override;
 
 	void pollEvents() override;
 	void shutdown() override;
@@ -43,8 +43,10 @@ public:
      */
     void useQtEventLoop(bool enable) { m_qtEventLoop = enable; }
 
-    virtual NativeWindowPair createWindow(const Ogre::String& name, uint32_t w = 0, uint32_t h = 0,
+    virtual OgreBites::NativeWindowPair createWindow(const Ogre::String& name, uint32_t w = 0, uint32_t h = 0,
                  Ogre::NameValuePairList miscParams = Ogre::NameValuePairList()) override;
+
+    void loadNewResources(const Ogre::String& resourcePath);
 public:
 	void attachWidget(QWidget* widget);
 	void setup() override;

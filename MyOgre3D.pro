@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -36,14 +36,13 @@ RCC_DIR     = BUILD
 UI_DIR      = BUILD
 
 
-INCLUDEPATH += /usr/local/include/OGRE/
-INCLUDEPATH += /usr/local/include/OGRE/Overlay
-INCLUDEPATH += /usr/local/include/OGRE/Bites
-INCLUDEPATH += /usr/local/include/OGRE/RTShaderSystem
+INCLUDEPATH += /usr/include/OGRE/
+INCLUDEPATH += /usr/include/OGRE/Overlay
+INCLUDEPATH += /usr/include/OGRE/Bites
+INCLUDEPATH += /usr/include/OGRE/RTShaderSystem
+
 
 include(QOgre3DWidget/QOgre3DWidget.pri)
 
-LIBS += -L/usr/local/lib/
-LIBS += -L/usr/local/lib/OGRE
+LIBS += -lOgreBites -lOgreMain -lOgreOverlay -lassimp
 
-LIBS += -lOgreBites -lOgreMain

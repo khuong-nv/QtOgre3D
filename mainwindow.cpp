@@ -1,15 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QHBoxLayout>
-#include "KApplicationContext.h"
+#include "MyTestWidget.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    OgreBites::KApplicationContext *context = new OgreBites::KApplicationContext();
-    setCentralWidget(new QOgre3DWidget(context));
+    setCentralWidget(new KEngine::MyTestWidget());
 }
 
 MainWindow::~MainWindow()

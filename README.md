@@ -7,7 +7,7 @@ This project demonstrates how to integrate Ogre3D into a Qt application using a 
 To run this project, you will need to have the following installed:
 - Ubuntu 22.04/18.04
 - Qt 5.14.2 or later
-- Ogre3D 1.12.13 or later
+- Ogre3D 1.12  (sudo apt-get install libogre-1.12-dev)
 
 ## Installation
 
